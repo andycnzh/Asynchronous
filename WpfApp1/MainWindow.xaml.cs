@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,11 +45,24 @@ namespace WpfApp1
             WrapPanel1.Children.Add(imageControl);
         }
 
-        private Image MakeImageControl(byte[] bytes)
+        private void AddAFaviconEAP(string domain)
+        {
+            WebClient webclient = new WebClient();
+            webclient.DownloadDataCompleted += OnWebClientOnDownloadDataCompleted;
+            webclient.DownloadDataAsync(new Uri("http://" + domain + "/favicon.ico"));
+        }
+
+        private void OnWebClientOnDownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        {
+            Image imageContrl = MakeImageControl(e.Result);
+            WrapPanel1.Children.Add(imageContrl);
+        }
+
+        private Image MakeImageControl(byte[] imageBytes)
         {
             var image = new BitmapImage();
 
-            using (var memoryStream = new MemoryStream(bytes))
+            using (var memoryStream = new MemoryStream(imageBytes))
             {
                 memoryStream.Position = 0;
                 image.BeginInit();
@@ -67,6 +81,15 @@ namespace WpfApp1
             img.Source = imgSource;
 
             return img;
+        }
+
+        private void btnEAP_Click(object sender, RoutedEventArgs e)
+        {
+            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
+            for (int i = 0; i < domains.Length; i++)
+            {
+                AddAFaviconEAP(domains[i]);
+            }
         }
     }
 }
