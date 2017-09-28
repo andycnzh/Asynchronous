@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -26,9 +27,9 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnDownload_Click(object sender, RoutedEventArgs e)
         {
-            string[] domains = new string[3] { "www.google.com", "www.bing.com", "www.baidu.com" };
+            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
             for (int i = 0; i < domains.Length; i++)
             {
                 AddAFavicon(domains[i]);
@@ -40,13 +41,32 @@ namespace WpfApp1
             WebClient webClient = new WebClient();
             byte[] bytes = webClient.DownloadData("http://" + domain + "/favicon.ico");
             Image imageControl = MakeImageControl(bytes);
-            //WrapPanel1.Children.Add(imageControl);
+            WrapPanel1.Children.Add(imageControl);
         }
 
         private Image MakeImageControl(byte[] bytes)
         {
-            //throw new NotImplementedException();
-            return null;
+            var image = new BitmapImage();
+
+            using (var memoryStream = new MemoryStream(bytes))
+            {
+                memoryStream.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = memoryStream;
+                image.EndInit();
+            }
+
+            image.Freeze();
+
+            ImageSource imgSource = image;
+
+            Image img = new Image();
+            img.Source = imgSource;
+
+            return img;
         }
     }
 }
