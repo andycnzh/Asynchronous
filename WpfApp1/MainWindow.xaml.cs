@@ -37,6 +37,24 @@ namespace WpfApp1
             }
         }
 
+        private void btnEAP_Click(object sender, RoutedEventArgs e)
+        {
+            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
+            for (int i = 0; i < domains.Length; i++)
+            {
+                AddAFaviconEAP(domains[i]);
+            }
+        }
+
+        private void btnAsync_Click(object sender, RoutedEventArgs e)
+        {
+            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
+            for (int i = 0; i < domains.Length; i++)
+            {
+                AddAFaviconAsync(domains[i]);
+            }
+        }
+
         private void AddAFavicon(string domain)
         {
             WebClient webClient = new WebClient();
@@ -56,6 +74,14 @@ namespace WpfApp1
         {
             Image imageContrl = MakeImageControl(e.Result);
             WrapPanel1.Children.Add(imageContrl);
+        }
+
+        private async void AddAFaviconAsync(string domain)
+        {
+            WebClient webClient = new WebClient();
+            byte[] bytes = await webClient.DownloadDataTaskAsync("http://" + domain + "/favicon.ico");
+            Image imageControl = MakeImageControl(bytes);
+            WrapPanel1.Children.Add(imageControl);
         }
 
         private Image MakeImageControl(byte[] imageBytes)
@@ -80,16 +106,17 @@ namespace WpfApp1
             Image img = new Image();
             img.Source = imgSource;
 
-            return img;
-        }
+            //Task.Delay((new Random()).Next(1000,3000));
+            //Thread.Sleep((new Random()).Next(1000, 3000));
 
-        private void btnEAP_Click(object sender, RoutedEventArgs e)
-        {
-            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
-            for (int i = 0; i < domains.Length; i++)
-            {
-                AddAFaviconEAP(domains[i]);
-            }
+            // DO time-costing calcuation, wait several seconds.
+            //FibonacciCalc fc = new FibonacciCalc();
+            //for (int i = 1; i < 40; i++)
+            //{
+            //    fc.RecurrenceCalc(i);
+            //}
+
+            return img;
         }
     }
 }
