@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="900">
     <Grid>
         <Button x:Name="btnDownload" Content="Download Favicon" HorizontalAlignment="Left" Margin="23,15,0,0" VerticalAlignment="Top" Width="163" RenderTransformOrigin="-0.482,-2.142" Click="btnDownload_Click"/>
-        <WrapPanel x:Name="WrapPanel1" HorizontalAlignment="Left" Height="228" Margin="23,51,0,0" VerticalAlignment="Top" Width="850"/>
+        <WrapPanel x:Name="m_WrapPanel" HorizontalAlignment="Left" Height="228" Margin="23,51,0,0" VerticalAlignment="Top" Width="850"/>
         <Button x:Name="btnEAP" Content="EAP Download" HorizontalAlignment="Left" Margin="201,15,0,0" VerticalAlignment="Top" Width="93" Click="btnEAP_Click"/>
         <Button x:Name="btnAsync" Content="Async Download" HorizontalAlignment="Left" Margin="309,15,0,0" VerticalAlignment="Top" Width="109" Click="btnAsync_Click"/>
     </Grid>

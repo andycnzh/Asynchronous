@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{3BC3C836-9057-4C3F-9EAD-95378AAD870C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaviconBrowser", "FaviconBrowser\FaviconBrowser.csproj", "{3BC3C836-9057-4C3F-9EAD-95378AAD870C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4B9C28A9-3212-4360-A262-22337E0A8765}
+		SolutionGuid = {E242E8D1-32C0-47C8-8A4D-5CE87350E9D2}
 	EndGlobalSection
 EndGlobal

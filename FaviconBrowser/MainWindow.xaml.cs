@@ -23,6 +23,18 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly List<string> s_Domains = new List<string>
+                                                             {
+                                                                 "www.google.com",
+                                                                 "www.bing.com",
+                                                                 "www.oreilly.com",
+                                                                 "www.simple-talk.com",
+                                                                 "www.microsoft.com",
+                                                                 "www.reddit.com",
+                                                                 "www.baidu.com",
+                                                                 "www.bbc.co.uk"
+                                                             };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,28 +42,25 @@ namespace WpfApp1
 
         private void btnDownload_Click(object sender, RoutedEventArgs e)
         {
-            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
-            for (int i = 0; i < domains.Length; i++)
+            foreach (string domain in s_Domains)
             {
-                AddAFavicon(domains[i]);
+                AddAFavicon(domain);
             }
         }
 
         private void btnEAP_Click(object sender, RoutedEventArgs e)
         {
-            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
-            for (int i = 0; i < domains.Length; i++)
+            foreach (string domain in s_Domains)
             {
-                AddAFaviconEAP(domains[i]);
+                AddAFaviconEAP(domain);
             }
         }
 
         private void btnAsync_Click(object sender, RoutedEventArgs e)
         {
-            string[] domains = new string[3] { "www.bing.com", "www.google.com", "www.baidu.com" };
-            for (int i = 0; i < domains.Length; i++)
+            foreach (string domain in s_Domains)
             {
-                AddAFaviconAsync(domains[i]);
+                AddAFaviconAsync(domain);
             }
         }
 
@@ -60,7 +69,7 @@ namespace WpfApp1
             WebClient webClient = new WebClient();
             byte[] bytes = webClient.DownloadData("http://" + domain + "/favicon.ico");
             Image imageControl = MakeImageControl(bytes);
-            WrapPanel1.Children.Add(imageControl);
+            m_WrapPanel.Children.Add(imageControl);
         }
 
         private void AddAFaviconEAP(string domain)
@@ -73,7 +82,7 @@ namespace WpfApp1
         private void OnWebClientOnDownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
             Image imageContrl = MakeImageControl(e.Result);
-            WrapPanel1.Children.Add(imageContrl);
+            m_WrapPanel.Children.Add(imageContrl);
         }
 
         private async void AddAFaviconAsync(string domain)
@@ -81,42 +90,32 @@ namespace WpfApp1
             WebClient webClient = new WebClient();
             byte[] bytes = await webClient.DownloadDataTaskAsync("http://" + domain + "/favicon.ico");
             Image imageControl = MakeImageControl(bytes);
-            WrapPanel1.Children.Add(imageControl);
+            m_WrapPanel.Children.Add(imageControl);
         }
 
         private Image MakeImageControl(byte[] imageBytes)
         {
-            var image = new BitmapImage();
+            var bitmapImage = new BitmapImage();
 
             using (var memoryStream = new MemoryStream(imageBytes))
             {
                 memoryStream.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = memoryStream;
-                image.EndInit();
+                bitmapImage.BeginInit();
+                bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.UriSource = null;
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.EndInit();
             }
 
-            image.Freeze();
+            bitmapImage.Freeze();
 
-            ImageSource imgSource = image;
+            Image imageControl = new Image();
+            imageControl.Source = bitmapImage;
+            imageControl.Height = 32;
+            imageControl.Width = 32;
 
-            Image img = new Image();
-            img.Source = imgSource;
-
-            //Task.Delay((new Random()).Next(1000,3000));
-            //Thread.Sleep((new Random()).Next(1000, 3000));
-
-            // DO time-costing calcuation, wait several seconds.
-            //FibonacciCalc fc = new FibonacciCalc();
-            //for (int i = 1; i < 40; i++)
-            //{
-            //    fc.RecurrenceCalc(i);
-            //}
-
-            return img;
+            return imageControl;
         }
     }
 }
