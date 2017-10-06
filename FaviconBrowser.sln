@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaviconBrowser", "FaviconBrowser\FaviconBrowser.csproj", "{3BC3C836-9057-4C3F-9EAD-95378AAD870C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaviconBrowser.UnitTests", "FaviconBrowser.UnitTests\FaviconBrowser.UnitTests.csproj", "{E225331C-F814-46A4-B857-9C7973D6C7AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3BC3C836-9057-4C3F-9EAD-95378AAD870C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BC3C836-9057-4C3F-9EAD-95378AAD870C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC3C836-9057-4C3F-9EAD-95378AAD870C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E225331C-F814-46A4-B857-9C7973D6C7AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E225331C-F814-46A4-B857-9C7973D6C7AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E225331C-F814-46A4-B857-9C7973D6C7AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E225331C-F814-46A4-B857-9C7973D6C7AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
