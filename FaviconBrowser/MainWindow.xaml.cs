@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace FaviconBrowser
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -116,6 +116,30 @@ namespace WpfApp1
             imageControl.Width = 32;
 
             return imageControl;
+        }
+
+        private void btnExceptionTest_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() => Caller());
+        }
+
+        private async Task Caller()
+        {
+            try
+            {
+                await Thrower();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Caller - Catch");
+            }
+        }
+
+        private async Task Thrower()
+        {
+            await Task.Delay(1000);
+            throw new Exception("Thrower");
         }
     }
 }
