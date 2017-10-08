@@ -10,9 +10,11 @@ namespace FaviconBrowser
     {
         public async Task<int> TaskMethod()
         {
+            int foo = 3;
+
             await Task.Delay(3000);
 
-            return 3;
+            return foo;
         }
     }
 }

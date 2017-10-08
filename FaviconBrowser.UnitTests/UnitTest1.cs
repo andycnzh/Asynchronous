@@ -10,6 +10,9 @@ namespace FaviconBrowser.UnitTests
         [TestMethod]
         public async Task TestMethod1()
         {
+            // MSTest support async/await
+            // The test method must return Task, 
+            // if return void, then this test case can't be found in test explorer.
             TaskTest t = new TaskTest();
 
             var result = await t.TaskMethod();
