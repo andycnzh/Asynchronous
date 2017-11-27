@@ -1,9 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
+﻿//------------------------------------------------------------
+// Copyright (c) 2017 AndyCnZh.  All rights reserved.
+//------------------------------------------------------------
 
 namespace FaviconBrowser.UnitTests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Threading.Tasks;
+
     [TestClass]
     public class UnitTest1
     {

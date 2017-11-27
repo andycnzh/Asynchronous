@@ -12,5 +12,6 @@
         <Button x:Name="btnEAP" Content="EAP Download" HorizontalAlignment="Left" Margin="201,15,0,0" VerticalAlignment="Top" Width="93" Click="btnEAP_Click"/>
         <Button x:Name="btnAsync" Content="Async Download" HorizontalAlignment="Left" Margin="309,15,0,0" VerticalAlignment="Top" Width="109" Click="btnAsync_Click"/>
         <Button x:Name="btnExceptionTest" Content="ExceptionTest" HorizontalAlignment="Left" Margin="441,15,0,0" VerticalAlignment="Top" Width="95" Click="btnExceptionTest_Click"/>
+        <Button x:Name="btnCurlAsync" Content="CurlAsync" HorizontalAlignment="Left" Margin="558,15,0,0" VerticalAlignment="Top" Width="74" Click="btnCurlAsync_Click"/>
     </Grid>
 </Window>

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿//------------------------------------------------------------
+// Copyright (c) 2017 AndyCnZh.  All rights reserved.
+//------------------------------------------------------------
 
 namespace FaviconBrowser
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -140,6 +136,41 @@ namespace FaviconBrowser
         {
             await Task.Delay(1000);
             throw new Exception("Thrower");
+        }
+
+        private void btnCurlAsync_Click(object sender, RoutedEventArgs e)
+        {
+            //var bynderContents = await DoCurlAsync();
+
+            // There is a dead lock here
+            //var bynderContents1 = DoCurlAsyncNoConfigureContext().Result;
+            //MessageBox.Show(bynderContents1.Length.ToString());
+
+            // There is no dead lock here
+            var bynderContents2 = DoCurlAsync().Result;
+            MessageBox.Show(bynderContents2.Length.ToString());
+        }
+
+        private async Task<string> DoCurlAsyncNoConfigureContext()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var httpResponse = await httpClient.GetAsync("https://www.bynder.com"))
+                {
+                    return await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        private async Task<string> DoCurlAsync()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var httpResponse = await httpClient.GetAsync("https://www.bynder.com").ConfigureAwait(false))
+                {
+                    return await httpResponse.Content.ReadAsStringAsync();
+                }
+            }
         }
     }
 }
